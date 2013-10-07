@@ -1,0 +1,27 @@
+This is the work of Austin New, for Arabnia's Programs 1 and 2 (Line Scan-Conversion)
+gp (Graphic Package), written in C using SDL for rendering and videocard control.
+
+This requires SDL to compile.
+
+last updated 9/12/11
+
+To compile:
+	make compile_line_draw
+		or
+	make ccompile_time_test
+
+To run:
+	./line_draw
+		or
+	./time_test <iterations> <lines_per_iteration>
+	
+	line_draw will prompt you to enter the number of line you'd like draw and what iterator you'd like to use.
+	Proper input might be "b 12345" or "d 9999", 'b' for Bresenham, and 'd' for DDA.
+	Lines are drawn with the screen refresh, otherwise they would appear all at once and disappear.
+	To exit the SDL Surface rendering, press any key.
+	
+	time_test is what I used to run my experiment, whose results may be found in time_comparison_test.txt
+	and whose write-up is inside a PDF, hw1_report.pdf
+	
+To clean:
+	make clean
