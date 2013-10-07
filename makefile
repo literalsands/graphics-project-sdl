@@ -1,19 +1,15 @@
 # Makefile for Austin New's Graphics Package
-# For Arabnia's Assignment 1
+# For Arabnia's Assignment 2
 
-# This Requires SDL to Compile
+# This Requires SDL with Development Headers to Compile
 
-compile_line_draw: hw1_line_draw.o gp_primitives.o gp_perform.o
-	gcc -Wall `sdl-config --libs` hw1_line_draw.o gp_primitives.o -o line_draw -lm
-compile_time_test: hw1_time_test.o gp_primitives.o
-	gcc -Wall `sdl-config --libs` hw1_time_test.o gp_primitives.o -o time_test -lm
-hw1_line_draw.o: gp_primitives.h gp_perform.h hw1_line_draw.c
-	gcc -c `sdl-config --cflags` -Wall hw1_line_draw.c
-hw1_time_test.o: gp_primitives.h hw1_time_test.c
-	gcc -c `sdl-config --cflags` -Wall hw1_time_test.c
-gp_perform.o: gp_primitives.h gp_primitives.c
-	gcc -c -Wall gp_primitives.c
-gp_primitives.o: gp_primitives.h gp_primitives.c
-	gcc -c -Wall gp_primitives.c
+compile: a2.o gp_trans.o gp_render.o
+	gcc -g -Wall `sdl-config --libs` a2.o gp_trans.o gp_render.o -o a2 -lm
+a2.o: gp_repr.h a2.c gp_trans.o gp_render.o
+	gcc -c -Wall `sdl-config --cflags` a2.c
+gp_trans.o: gp_repr.h gp_trans.h gp_trans.c
+	gcc -c -Wall gp_trans.c
+gp_render.o: gp_repr.h gp_render.h gp_render.c
+	gcc -c -Wall `sdl-config --cflags` gp_render.c
 clean:
-	\rm *.o time_test line_draw
+	\rm *.o a2
