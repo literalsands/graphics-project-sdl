@@ -173,15 +173,14 @@ void ClipLine2DAndRender(SDL_Surface* screen, ViewPort* vp, Line2D* line, RGBCol
 	return;
 }
 
-void PerspectiveProjection3D(RealPoint2D* ppoint, SDL_Surface* screen, RealPoint3D* focus, RealPoint3D* point, float reals, float reald) {
+void PerspectiveProjection3D(RealPoint2D* ppoint, SDL_Surface* screen, RealPoint3D* focus, RealPoint3D* point, RealPoint3D* trp, float reals, float reald, int coord) {
 	/* Note:
 			real size and real distance are acknowledged to be in the same measurement.
-			The camera is has no 'tilt', 'roll', or 'pitch'.
+			The camera has no 'tilt', 'roll', or 'pitch'.
 	*/
-	RealPoint3D trp = {0.0, 0.0, 0.0};
 	float wcs = reals/reald;
-	float cx=cos(trp[0]), cy=cos(trp[1]), cz=cos(trp[2]),
-		sx=sin(trp[0]), sy=sin(trp[1]), sz=sin(trp[2]);
+	float cx=cos((*trp)[0]), cy=cos((*trp)[1]), cz=cos((*trp)[2]),
+		sx=sin((*trp)[0]), sy=sin((*trp)[1]), sz=sin((*trp)[2]);
 	float ddx = (*point)[0] - (*focus)[0],
 		ddy = (*point)[1] - (*focus)[1],
 		ddz = (*point)[2] - (*focus)[2];
@@ -190,7 +189,9 @@ void PerspectiveProjection3D(RealPoint2D* ppoint, SDL_Surface* screen, RealPoint
 	float dx = cy * (sz * ddy + cz * ddx) - sy * ddz,
 		dy = sx * sub_yz1 + cx * sub_yz2,
 		dz = cx * sub_yz1 - sx * sub_yz2;
-	(*ppoint)[0] = dx / dz * wcs;
-	(*ppoint)[1] = dy / dz * wcs;
+	
+	// Made 3D Origin at Center of Screen
+	(*ppoint)[0] = (screen->w >> 1) + dx * 2 / dz * wcs * coord;
+	(*ppoint)[1] = (screen->h >> 1) + dy * 2 / dz * wcs * coord;
 }
 

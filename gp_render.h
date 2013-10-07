@@ -9,7 +9,7 @@ typedef Point2D ViewPort[2]; // Upper Left Corner, Lower Right Corner; Must be i
 void setViewPort(SDL_Surface*, ViewPort*, int, int, int, int);
 void ClipLine2DAndRender(SDL_Surface*, ViewPort*, Line2D*, RGBColor*); // Renders a 2DLine to the ViewPort
 
-void PerspectiveProjection3D(RealPoint2D*, SDL_Surface*, RealPoint3D*, RealPoint3D*, float, float);
+void PerspectiveProjection3D(RealPoint2D*, SDL_Surface*, RealPoint3D*, RealPoint3D*, RealPoint3D*, float, float, int);
 void setViewPoint(SDL_Surface*, ViewPort*, Point3D*);
 void PerspectiveProject3DAndRender(SDL_Surface*, ViewPort*, Line3D*, RGBColor*); // Renders a 3DLine to the ViewPort
 // Then passes line to ClipLine2DAndRender.
