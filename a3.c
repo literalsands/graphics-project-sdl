@@ -1,5 +1,5 @@
-#define WIDTH 1280
-#define HEIGHT 800
+#define WIDTH 2880
+#define HEIGHT 1800
 #define BPP 4
 #define DEPTH 32
 
@@ -30,9 +30,8 @@ int main () {
 	plines = (RealLine2D*)malloc(sizeof(RealLine2D)*num_lines);
 	dlines = (Line2D*)malloc(sizeof(Line2D)*num_lines);
 	
-	for
 	/* This is a single cube. */
-	/* lines[0][0][0] = -1;
+	lines[0][0][0] = -1;
 	lines[0][0][1] = 1;
 	lines[0][0][2] = -1;
 	lines[0][1][0] = 1;
@@ -103,25 +102,25 @@ int main () {
 	lines[11][0][2] = -1;
 	lines[11][1][0] = -1;
 	lines[11][1][1] = -1;
-	lines[11][1][2] = 1; */
+	lines[11][1][2] = 1;
 	
 	/* Make a grid of many more cubes. */
-	/* for(i=1; i<num_lines/12; i++) {
+	for(i=1; i<num_lines/12; i++) {
 		for(j=0; j<12; j++) {
-			lines[i*12 + j][0][0] = lines[j][0][0] + (i % 4 - i) / 2;
-			lines[i*12 + j][0][1] = lines[j][0][1] + (i % 4 * 2 - i * 2) / 2;
-			lines[i*12 + j][0][2] = lines[j][0][2] + i % 2;
-			lines[i*12 + j][1][0] = lines[j][1][0] + (i % 4 - i) / 2;
-			lines[i*12 + j][1][1] = lines[j][1][1] + (i % 4 * 2 - i * 2) / 2;
-			lines[i*12 + j][1][2] = lines[j][1][2] + i % 2;
+			lines[i*12 + j][0][0] = lines[j][0][0] - (i % 4 - i);//(i % 4 - i) / 2;
+			lines[i*12 + j][0][1] = lines[j][0][1] - (i % 4) * 4;//(i % 4 * 2 - i * 2) / 2;
+			lines[i*12 + j][0][2] = lines[j][0][2];
+			lines[i*12 + j][1][0] = lines[j][1][0] - (i % 4 - i);
+			lines[i*12 + j][1][1] = lines[j][1][1] - (i % 4) * 4; //(i % 4 * 2 - i * 2) / 2;
+			lines[i*12 + j][1][2] = lines[j][1][2];
 		}
-	} */
+	}
 	
 	RGBColor white = {255, 255, 255}; // Draw Color
 	RGBColor black = {0, 0, 0}; // Selective-Erase Color
 	
-	ViewPort view = {{1, 1}, {1278, 798}}; // Because round, needs padding.
-	RealPoint3D focus = {6.0, 8.0, 7.5};
+	ViewPort view = {{1, 1}, {2878, 1798}}; // Because round, needs padding.
+	RealPoint3D focus = {14.0, -6.0, 5.5};
 	RealPoint3D trp = {0.0, 0.0, 0.0}; // Start at Origin looking down X.
 	
 	int coord = 400;
